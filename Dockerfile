@@ -24,7 +24,7 @@ RUN chkconfig --add gremlin-server
 RUN BACKEND_PROPERTIES=${INSTALL_DIR}/conf/gremlin-server/dynamodb.properties
 RUN chown -R ${GREMLIN_SERVER_USERNAME}:${GREMLIN_SERVER_USERNAME} ${INSTALL_DIR}
 
-COPY ./conf /conf
+# COPY ./conf /conf
 
 EXPOSE 8182
 
