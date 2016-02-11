@@ -24,8 +24,8 @@ RUN chkconfig --add gremlin-server
 RUN BACKEND_PROPERTIES=${INSTALL_DIR}/conf/gremlin-server/dynamodb.properties
 RUN chown -R ${GREMLIN_SERVER_USERNAME}:${GREMLIN_SERVER_USERNAME} ${INSTALL_DIR}
 
-COPY ./gremlin-server.yaml /
+COPY ./conf /conf
 
 EXPOSE 8182
 
-CMD ["/usr/local/packages/dynamodb-titan100-storage-backend-1.0.0-hadoop1/bin/gremlin-server.sh", "/gremlin-server.yaml"]
+CMD ["/usr/local/packages/dynamodb-titan100-storage-backend-1.0.0-hadoop1/bin/gremlin-server.sh", "/conf/gremlin-server.yaml"]
