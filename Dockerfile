@@ -1,6 +1,10 @@
 FROM centos:7
 
-RUN yum install -y sqlite-devel unzip java-1.8.0-openjdk
+RUN curl -v -j -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u73-b02/jdk-8u73-linux-x64.rpm > jdk-8u73-linux-x64.rpm
+
+RUN yum localinstall -y jdk-8u73-linux-x64.rpm
+
+RUN yum install -y sqlite-devel unzip
 
 ENV GREMLIN_SERVER_USERNAME='root'
 ENV LOG_DIR=/var/log/gremlin-server
@@ -24,7 +28,8 @@ RUN chkconfig --add gremlin-server
 RUN BACKEND_PROPERTIES=${INSTALL_DIR}/conf/gremlin-server/dynamodb.properties
 RUN chown -R ${GREMLIN_SERVER_USERNAME}:${GREMLIN_SERVER_USERNAME} ${INSTALL_DIR}
 
-# COPY ./conf /conf
+ADD ./conf /conf
+ADD ./scripts /scripts
 
 EXPOSE 8182
 
